@@ -22,31 +22,32 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{B6E15D83-46DE-4393-BC93-0D0E7201B176}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>game_engine</RootNamespace>
+    <RootNamespace>engine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <ProjectName>engine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -88,6 +89,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -99,6 +102,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -112,6 +117,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -127,6 +134,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,19 +147,58 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="sdl_pp\exception.h" />
+    <ClInclude Include="sdl_pp\raii_base.h" />
+    <ClInclude Include="sdl_pp\renderer.h" />
+    <ClInclude Include="sdl_pp\sdl_pp.h" />
+    <ClInclude Include="sdl_pp\surface.h" />
+    <ClInclude Include="sdl_pp\text.h" />
+    <ClInclude Include="sdl_pp\texture.h" />
+    <ClInclude Include="sdl_pp\window.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="util\color_console.h" />
+    <ClInclude Include="util\log.h" />
+    <ClInclude Include="util\util.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="game_engine.cpp" />
+    <ClCompile Include="engine.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="util\color_console.cpp" />
+    <ClCompile Include="util\util.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\sdl2.v140.redist.2.0.4\build\native\sdl2.v140.redist.targets" Condition="Exists('..\packages\sdl2.v140.redist.2.0.4\build\native\sdl2.v140.redist.targets')" />
+    <Import Project="..\packages\sdl2.v140.2.0.4\build\native\sdl2.v140.targets" Condition="Exists('..\packages\sdl2.v140.2.0.4\build\native\sdl2.v140.targets')" />
+    <Import Project="..\packages\libjpeg.redist.9.0.1.4\build\native\libjpeg.redist.targets" Condition="Exists('..\packages\libjpeg.redist.9.0.1.4\build\native\libjpeg.redist.targets')" />
+    <Import Project="..\packages\libpng.redist.1.6.19.1\build\native\libpng.redist.targets" Condition="Exists('..\packages\libpng.redist.1.6.19.1\build\native\libpng.redist.targets')" />
+    <Import Project="..\packages\libtiff.redist.4.0.6.2\build\native\libtiff.redist.targets" Condition="Exists('..\packages\libtiff.redist.4.0.6.2\build\native\libtiff.redist.targets')" />
+    <Import Project="..\packages\libwebp.v140.redist.0.5.0.1\build\native\libwebp.v140.redist.targets" Condition="Exists('..\packages\libwebp.v140.redist.0.5.0.1\build\native\libwebp.v140.redist.targets')" />
+    <Import Project="..\packages\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\build\native\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.targets" Condition="Exists('..\packages\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\build\native\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.targets')" />
+    <Import Project="..\packages\sdl2_image.v140.redist.2.0.1\build\native\sdl2_image.v140.redist.targets" Condition="Exists('..\packages\sdl2_image.v140.redist.2.0.1\build\native\sdl2_image.v140.redist.targets')" />
+    <Import Project="..\packages\sdl2_image.v140.2.0.1\build\native\sdl2_image.v140.targets" Condition="Exists('..\packages\sdl2_image.v140.2.0.1\build\native\sdl2_image.v140.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\sdl2.v140.redist.2.0.4\build\native\sdl2.v140.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2.v140.redist.2.0.4\build\native\sdl2.v140.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\sdl2.v140.2.0.4\build\native\sdl2.v140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2.v140.2.0.4\build\native\sdl2.v140.targets'))" />
+    <Error Condition="!Exists('..\packages\libjpeg.redist.9.0.1.4\build\native\libjpeg.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\libjpeg.redist.9.0.1.4\build\native\libjpeg.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\libpng.redist.1.6.19.1\build\native\libpng.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\libpng.redist.1.6.19.1\build\native\libpng.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\libtiff.redist.4.0.6.2\build\native\libtiff.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\libtiff.redist.4.0.6.2\build\native\libtiff.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\libwebp.v140.redist.0.5.0.1\build\native\libwebp.v140.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\libwebp.v140.redist.0.5.0.1\build\native\libwebp.v140.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\build\native\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.1.2.8.8\build\native\zlib.v140.windesktop.msvcstl.dyn.rt-dyn.targets'))" />
+    <Error Condition="!Exists('..\packages\sdl2_image.v140.redist.2.0.1\build\native\sdl2_image.v140.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2_image.v140.redist.2.0.1\build\native\sdl2_image.v140.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\sdl2_image.v140.2.0.1\build\native\sdl2_image.v140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2_image.v140.2.0.1\build\native\sdl2_image.v140.targets'))" />
+  </Target>
 </Project>
